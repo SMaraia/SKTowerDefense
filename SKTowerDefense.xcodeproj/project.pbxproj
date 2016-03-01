@@ -16,6 +16,11 @@
 		C58267EF1C761CF10084A710 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C58267ED1C761CF10084A710 /* LaunchScreen.storyboard */; };
 		C5A274261C854F7F000D094D /* Fireball.sks in Resources */ = {isa = PBXBuildFile; fileRef = C5A274251C854F7F000D094D /* Fireball.sks */; };
 		C5A274281C854F90000D094D /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = C5A274271C854F90000D094D /* spark.png */; };
+		C5A2742A1C85671E000D094D /* StartGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A274291C85671E000D094D /* StartGameScene.swift */; };
+		C5A2742C1C856809000D094D /* newgamebtn.png in Resources */ = {isa = PBXBuildFile; fileRef = C5A2742B1C856809000D094D /* newgamebtn.png */; };
+		C5A2742E1C85695C000D094D /* CONQUEST.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C5A2742D1C856910000D094D /* CONQUEST.ttf */; };
+		C5A274301C856A08000D094D /* AboutGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A2742F1C856A08000D094D /* AboutGameScene.swift */; };
+		C5A274321C856B71000D094D /* aboutBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = C5A274311C856B71000D094D /* aboutBtn.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +35,11 @@
 		C58267F01C761CF10084A710 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5A274251C854F7F000D094D /* Fireball.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fireball.sks; sourceTree = "<group>"; };
 		C5A274271C854F90000D094D /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		C5A274291C85671E000D094D /* StartGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartGameScene.swift; sourceTree = "<group>"; };
+		C5A2742B1C856809000D094D /* newgamebtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newgamebtn.png; sourceTree = "<group>"; };
+		C5A2742D1C856910000D094D /* CONQUEST.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CONQUEST.ttf; sourceTree = "<group>"; };
+		C5A2742F1C856A08000D094D /* AboutGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutGameScene.swift; sourceTree = "<group>"; };
+		C5A274311C856B71000D094D /* aboutBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aboutBtn.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,9 +75,14 @@
 				C58267E01C761CF10084A710 /* AppDelegate.swift */,
 				C58267E41C761CF10084A710 /* GameScene.swift */,
 				C58267E61C761CF10084A710 /* GameViewController.swift */,
+				C5A274291C85671E000D094D /* StartGameScene.swift */,
+				C5A2742F1C856A08000D094D /* AboutGameScene.swift */,
+				C5A2742D1C856910000D094D /* CONQUEST.ttf */,
 				C55FD0A11C7ED81F00B4CAB9 /* MyUtils.swift */,
 				C58267E81C761CF10084A710 /* Main.storyboard */,
 				C5A274251C854F7F000D094D /* Fireball.sks */,
+				C5A2742B1C856809000D094D /* newgamebtn.png */,
+				C5A274311C856B71000D094D /* aboutBtn.png */,
 				C58267EB1C761CF10084A710 /* Assets.xcassets */,
 				C5A274271C854F90000D094D /* spark.png */,
 				C58267ED1C761CF10084A710 /* LaunchScreen.storyboard */,
@@ -135,9 +150,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5A274281C854F90000D094D /* spark.png in Resources */,
+				C5A2742E1C85695C000D094D /* CONQUEST.ttf in Resources */,
 				C5A274261C854F7F000D094D /* Fireball.sks in Resources */,
 				C58267EF1C761CF10084A710 /* LaunchScreen.storyboard in Resources */,
+				C5A2742C1C856809000D094D /* newgamebtn.png in Resources */,
 				C58267EC1C761CF10084A710 /* Assets.xcassets in Resources */,
+				C5A274321C856B71000D094D /* aboutBtn.png in Resources */,
 				C58267EA1C761CF10084A710 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,6 +169,8 @@
 			files = (
 				C58267E51C761CF10084A710 /* GameScene.swift in Sources */,
 				C58267E71C761CF10084A710 /* GameViewController.swift in Sources */,
+				C5A274301C856A08000D094D /* AboutGameScene.swift in Sources */,
+				C5A2742A1C85671E000D094D /* StartGameScene.swift in Sources */,
 				C58267E11C761CF10084A710 /* AppDelegate.swift in Sources */,
 				C55FD0A31C7ED81F00B4CAB9 /* MyUtils.swift in Sources */,
 			);

@@ -111,7 +111,7 @@ class GameScene: SKScene {
             
             
             
-            tempBullet.runAction(SKAction.sequence([SKAction.moveTo(tower.position + CGPoint(x: cos(tower.zRotation), y: sin(tower.zRotation)) * self.frame.height / 2, duration: 0.5), SKAction.removeFromParent()]))
+            tempBullet.runAction(SKAction.sequence([SKAction.moveTo(tower.position + CGPoint(x: cos(tower.zRotation), y: sin(tower.zRotation)) * self.frame.width / 2, duration: 0.5), SKAction.removeFromParent()]))
             canFire = false
             
             let reloadTimer = NSTimer(timeInterval: 0.2, target: self, selector: "reload", userInfo: nil, repeats: false)
