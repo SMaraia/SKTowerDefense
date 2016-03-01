@@ -21,10 +21,11 @@ class GameScene: SKScene {
     
     var lastTouchLocation = CGPoint.zero
     
-    
+    //TODO: Add Enemy Array
     
     var touched = false
     override init(size: CGSize){
+        //TODO: Implement PlayableRect similar to ZombieConga
         super.init(size: size)
     }
     
@@ -96,8 +97,9 @@ class GameScene: SKScene {
         lastUpdateTime = currentTime
         
         tower.update(dt)
+        //TODO: Add Enemy Array update
         
-        if tower.shouldFire && touched && tower.canFire{
+        if tower.willFire && touched{
             tower.fire()
         }
         

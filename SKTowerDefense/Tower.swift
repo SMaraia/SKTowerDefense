@@ -10,9 +10,12 @@ import SpriteKit
 
 class Tower: SKSpriteNode{
     
-    var canFire = true
+    private var canFire = true
+    private var shouldFire = false
     
-    var shouldFire = false
+    var willFire : Bool {
+        return canFire && shouldFire
+    }
 
     var rotDir: CGPoint = CGPoint.zero
     
