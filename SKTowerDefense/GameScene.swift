@@ -13,6 +13,8 @@ class GameScene: SKScene {
     
     let tower = Tower()
     
+    var enemies = [Enemy]()
+    
     var lastUpdateTime: NSTimeInterval = 0
     var dt: NSTimeInterval = 0
     
@@ -38,7 +40,10 @@ class GameScene: SKScene {
         tower.yScale = 0.25
         addChild(tower)
         
-
+        enemies.append(Enemy())
+        for e in enemies{
+            addChild(e)
+        }
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -77,9 +82,6 @@ class GameScene: SKScene {
         let towerToTouch = touchLocation - tower.position
         let normalizedTowerTouch = towerToTouch.normalized()
         tower.rotDir = normalizedTowerTouch
-
-        
-        
     }
    
     override func update(currentTime: CFTimeInterval) {
@@ -97,6 +99,10 @@ class GameScene: SKScene {
         
         if tower.shouldFire && touched && tower.canFire{
             tower.fire()
+        }
+        
+        for e in enemies{
+            e.update(tower.position, dt: dt)
         }
     }
     

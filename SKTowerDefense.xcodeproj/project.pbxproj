@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		676D1D3F1C85E22D00234316 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676D1D3E1C85E22D00234316 /* Enemy.swift */; };
 		C55FD0A31C7ED81F00B4CAB9 /* MyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD0A11C7ED81F00B4CAB9 /* MyUtils.swift */; };
 		C58267E11C761CF10084A710 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58267E01C761CF10084A710 /* AppDelegate.swift */; };
 		C58267E51C761CF10084A710 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58267E41C761CF10084A710 /* GameScene.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		676D1D3E1C85E22D00234316 /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		C55FD0A11C7ED81F00B4CAB9 /* MyUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyUtils.swift; sourceTree = "<group>"; };
 		C58267DD1C761CF10084A710 /* SKTowerDefense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SKTowerDefense.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C58267E01C761CF10084A710 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				C58267E41C761CF10084A710 /* GameScene.swift */,
 				C58267E61C761CF10084A710 /* GameViewController.swift */,
 				C5A274331C856E14000D094D /* Tower.swift */,
+				676D1D3E1C85E22D00234316 /* Enemy.swift */,
 				C5A274291C85671E000D094D /* StartGameScene.swift */,
 				C5A2742F1C856A08000D094D /* AboutGameScene.swift */,
 				C5A2742D1C856910000D094D /* CONQUEST.ttf */,
@@ -174,6 +177,7 @@
 				C58267E71C761CF10084A710 /* GameViewController.swift in Sources */,
 				C5A274301C856A08000D094D /* AboutGameScene.swift in Sources */,
 				C5A274341C856E14000D094D /* Tower.swift in Sources */,
+				676D1D3F1C85E22D00234316 /* Enemy.swift in Sources */,
 				C5A2742A1C85671E000D094D /* StartGameScene.swift in Sources */,
 				C58267E11C761CF10084A710 /* AppDelegate.swift in Sources */,
 				C55FD0A31C7ED81F00B4CAB9 /* MyUtils.swift in Sources */,
