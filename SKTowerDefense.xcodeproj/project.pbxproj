@@ -14,6 +14,8 @@
 		C58267EA1C761CF10084A710 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C58267E81C761CF10084A710 /* Main.storyboard */; };
 		C58267EC1C761CF10084A710 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C58267EB1C761CF10084A710 /* Assets.xcassets */; };
 		C58267EF1C761CF10084A710 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C58267ED1C761CF10084A710 /* LaunchScreen.storyboard */; };
+		C5A274261C854F7F000D094D /* Fireball.sks in Resources */ = {isa = PBXBuildFile; fileRef = C5A274251C854F7F000D094D /* Fireball.sks */; };
+		C5A274281C854F90000D094D /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = C5A274271C854F90000D094D /* spark.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		C58267EB1C761CF10084A710 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C58267EE1C761CF10084A710 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C58267F01C761CF10084A710 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C5A274251C854F7F000D094D /* Fireball.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fireball.sks; sourceTree = "<group>"; };
+		C5A274271C854F90000D094D /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +67,9 @@
 				C58267E61C761CF10084A710 /* GameViewController.swift */,
 				C55FD0A11C7ED81F00B4CAB9 /* MyUtils.swift */,
 				C58267E81C761CF10084A710 /* Main.storyboard */,
+				C5A274251C854F7F000D094D /* Fireball.sks */,
 				C58267EB1C761CF10084A710 /* Assets.xcassets */,
+				C5A274271C854F90000D094D /* spark.png */,
 				C58267ED1C761CF10084A710 /* LaunchScreen.storyboard */,
 				C58267F01C761CF10084A710 /* Info.plist */,
 			);
@@ -128,6 +134,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5A274281C854F90000D094D /* spark.png in Resources */,
+				C5A274261C854F7F000D094D /* Fireball.sks in Resources */,
 				C58267EF1C761CF10084A710 /* LaunchScreen.storyboard in Resources */,
 				C58267EC1C761CF10084A710 /* Assets.xcassets in Resources */,
 				C58267EA1C761CF10084A710 /* Main.storyboard in Resources */,
