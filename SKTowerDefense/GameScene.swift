@@ -11,25 +11,18 @@ import SpriteKit
 
 class GameScene: SKScene {
     
-    let tower = SKSpriteNode(imageNamed:"Spaceship")
+    let tower = Tower()
     
     var lastUpdateTime: NSTimeInterval = 0
     var dt: NSTimeInterval = 0
     
-    var rotDir: CGPoint = CGPoint.zero
+    
     var lastTouchLocation = CGPoint.zero
     
-    let bulletPath = NSBundle.mainBundle().pathForResource("Fireball", ofType: "sks")
     
-    var bullet : SKEmitterNode
     
-    var canFire = true
-    
-    var shouldFire = false
     var touched = false
     override init(size: CGSize){
-        bullet = NSKeyedUnarchiver.unarchiveObjectWithFile(bulletPath!) as! SKEmitterNode
-        
         super.init(size: size)
     }
     
@@ -41,8 +34,8 @@ class GameScene: SKScene {
         /* Setup your scene here */
         
         tower.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame))
-        tower.xScale = 0.5
-        tower.yScale = 0.5
+        tower.xScale = 0.25
+        tower.yScale = 0.25
         addChild(tower)
         
 
@@ -83,7 +76,7 @@ class GameScene: SKScene {
         lastTouchLocation = touchLocation
         let towerToTouch = touchLocation - tower.position
         let normalizedTowerTouch = towerToTouch.normalized()
-        rotDir = normalizedTowerTouch
+        tower.rotDir = normalizedTowerTouch
 
         
         
@@ -100,41 +93,15 @@ class GameScene: SKScene {
         }
         lastUpdateTime = currentTime
         
-        shouldFire = rotateTower(rotDir, rotateRadiansPerSec: 4.0 * π)
+        tower.update(dt)
         
-        if shouldFire && touched && canFire{
-            let tempBullet = bullet.copy() as! SKEmitterNode
-            
-            tempBullet.position = tower.position + CGPoint(x: cos(tower.zRotation) * (tower.frame.width / 2), y: sin(tower.zRotation) * (tower.frame.height / 2))
-            tempBullet.zRotation = tower.zRotation
-            addChild(tempBullet)
-            
-            
-            
-            tempBullet.runAction(SKAction.sequence([SKAction.moveTo(tower.position + CGPoint(x: cos(tower.zRotation), y: sin(tower.zRotation)) * self.frame.width / 2, duration: 0.5), SKAction.removeFromParent()]))
-            canFire = false
-            
-            let reloadTimer = NSTimer(timeInterval: 0.2, target: self, selector: "reload", userInfo: nil, repeats: false)
-            NSRunLoop.mainRunLoop().addTimer(reloadTimer, forMode: NSRunLoopCommonModes)
+        if tower.shouldFire && touched && tower.canFire{
+            tower.fire()
         }
     }
     
-    func reload(){
-        canFire = true
-    }
     
-    func rotateTower(direction: CGPoint, rotateRadiansPerSec: CGFloat) -> Bool {
-        let shortAngle = shortestAngleBetween(tower.zRotation, angle2: direction.angle)
-        
-        var rotAmt = rotateRadiansPerSec * CGFloat(dt)
-        
-        rotAmt = min(rotAmt, abs(shortAngle))
-        
-        tower.zRotation += rotAmt * shortAngle.sign()
-        
-        return Int(shortAngle) == 0
-        
-    }
+    
 
 }
 

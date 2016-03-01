@@ -21,6 +21,7 @@
 		C5A2742E1C85695C000D094D /* CONQUEST.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C5A2742D1C856910000D094D /* CONQUEST.ttf */; };
 		C5A274301C856A08000D094D /* AboutGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A2742F1C856A08000D094D /* AboutGameScene.swift */; };
 		C5A274321C856B71000D094D /* aboutBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = C5A274311C856B71000D094D /* aboutBtn.png */; };
+		C5A274341C856E14000D094D /* Tower.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A274331C856E14000D094D /* Tower.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		C5A2742D1C856910000D094D /* CONQUEST.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CONQUEST.ttf; sourceTree = "<group>"; };
 		C5A2742F1C856A08000D094D /* AboutGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutGameScene.swift; sourceTree = "<group>"; };
 		C5A274311C856B71000D094D /* aboutBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aboutBtn.png; sourceTree = "<group>"; };
+		C5A274331C856E14000D094D /* Tower.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tower.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				C58267E01C761CF10084A710 /* AppDelegate.swift */,
 				C58267E41C761CF10084A710 /* GameScene.swift */,
 				C58267E61C761CF10084A710 /* GameViewController.swift */,
+				C5A274331C856E14000D094D /* Tower.swift */,
 				C5A274291C85671E000D094D /* StartGameScene.swift */,
 				C5A2742F1C856A08000D094D /* AboutGameScene.swift */,
 				C5A2742D1C856910000D094D /* CONQUEST.ttf */,
@@ -170,6 +173,7 @@
 				C58267E51C761CF10084A710 /* GameScene.swift in Sources */,
 				C58267E71C761CF10084A710 /* GameViewController.swift in Sources */,
 				C5A274301C856A08000D094D /* AboutGameScene.swift in Sources */,
+				C5A274341C856E14000D094D /* Tower.swift in Sources */,
 				C5A2742A1C85671E000D094D /* StartGameScene.swift in Sources */,
 				C58267E11C761CF10084A710 /* AppDelegate.swift in Sources */,
 				C55FD0A31C7ED81F00B4CAB9 /* MyUtils.swift in Sources */,
