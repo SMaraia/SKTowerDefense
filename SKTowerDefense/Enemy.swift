@@ -21,6 +21,12 @@ class Enemy: SKSpriteNode{
         self.position = CGPoint(
             x: 0,
             y: 0)
+        
+        physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.5, size: self.size)
+        physicsBody?.dynamic = true
+        physicsBody?.categoryBitMask = PhysicsCategory.Enemy
+        physicsBody?.contactTestBitMask = PhysicsCategory.Projectile | PhysicsCategory.Tower
+        physicsBody?.collisionBitMask = PhysicsCategory.None
     }
     
     required init?(coder aDecoder: NSCoder) {

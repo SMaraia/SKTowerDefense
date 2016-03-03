@@ -28,6 +28,12 @@ class Tower: SKSpriteNode{
         bullet = NSKeyedUnarchiver.unarchiveObjectWithFile(bulletPath!) as! SKEmitterNode
         let texture = SKTexture(imageNamed: "Spaceship")
         super.init(texture: texture, color: SKColor.clearColor(), size: texture.size())
+        
+        physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.5, size: size)
+        physicsBody?.dynamic = false
+        physicsBody?.categoryBitMask = PhysicsCategory.Tower
+        physicsBody?.contactTestBitMask = PhysicsCategory.Enemy
+        physicsBody?.collisionBitMask = PhysicsCategory.None
     }
 
     
@@ -37,6 +43,13 @@ class Tower: SKSpriteNode{
         
         tempBullet.position = position + CGPoint(x: cos(zRotation) * (frame.width / 2), y: sin(zRotation) * (frame.height / 2))
         tempBullet.zRotation = zRotation
+        tempBullet.physicsBody = SKPhysicsBody(circleOfRadius: tempBullet.particlePositionRange.dx)
+        tempBullet.physicsBody?.dynamic = true
+        tempBullet.physicsBody?.categoryBitMask = PhysicsCategory.Projectile
+        tempBullet.physicsBody?.contactTestBitMask = PhysicsCategory.Enemy
+        tempBullet.physicsBody?.collisionBitMask = PhysicsCategory.None
+        tempBullet.physicsBody?.usesPreciseCollisionDetection = true
+        
         parent!.addChild(tempBullet)
         
         
