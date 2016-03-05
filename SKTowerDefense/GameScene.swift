@@ -21,6 +21,7 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
     let tower = Tower()
     
     var enemies = [Enemy]()
+    var wave = 0;
     
     var lastUpdateTime: NSTimeInterval = 0
     var dt: NSTimeInterval = 0
@@ -54,11 +55,7 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         let pinch = UIPinchGestureRecognizer(target: self, action: "handlePinch:")
         self.view!.addGestureRecognizer(pinch)
         
-        
-        enemies.append(Enemy())
-        for e in enemies{
-            addChild(e)
-        }
+        spawnEnemies()
     }
     
     func handlePinch(sender: UIPinchGestureRecognizer) {
@@ -127,11 +124,17 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         for e in enemies{
             e.update(tower.position, dt: dt)
         }
+        
+        if enemies.count == 0{
+            ++wave
+            spawnEnemies()
+        }
     }
     
     func projectileHitEnemy(enemy: SKSpriteNode, projectile: SKEmitterNode) {
         projectile.removeFromParent()
         print(enemies.count)
+        enemies.removeAtIndex(enemies.indexOf(enemy as! Enemy)!)
         enemy.removeFromParent()
         print(enemies.count)
     }
@@ -181,6 +184,17 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer,
          shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool{
         return true
+    }
+    
+    func spawnEnemies(){
+        let enemiesToSpawn = calcFibonacciNumber(wave)
+        for var i = 0; i < enemiesToSpawn; ++i
+        {
+            enemies.append(Enemy())
+        }
+        for e in enemies{
+            addChild(e)
+        }
     }
 }
 

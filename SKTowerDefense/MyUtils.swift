@@ -96,6 +96,15 @@ extension CGPoint {
   }
 }
 
+
+func calcFibonacciNumber(input: Int) -> Int{
+    if input <= 2 {
+        return 1
+    } else {
+        return calcFibonacciNumber(input - 1) + calcFibonacciNumber(input - 2)
+    }
+}
+
 let π = CGFloat(M_PI)
 
 func shortestAngleBetween(angle1: CGFloat, 
@@ -126,4 +135,5 @@ extension CGFloat {
     assert(min < max)
     return CGFloat.random() * (max - min) + min
   }
+
 }
