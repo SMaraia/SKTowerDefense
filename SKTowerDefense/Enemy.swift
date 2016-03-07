@@ -14,9 +14,12 @@ class Enemy: SKSpriteNode{
     
     let moveSpeed:CGFloat = 5.0
     
+    
     init(){
         let texture = SKTexture(imageNamed: "Spaceship")
+        
         super.init(texture: texture, color: SKColor.clearColor(), size: texture.size())
+        
         self.name = "enemy"
         self.position = CGPoint(
             x: 0,
@@ -27,6 +30,8 @@ class Enemy: SKSpriteNode{
         physicsBody?.categoryBitMask = PhysicsCategory.Enemy
         physicsBody?.contactTestBitMask = PhysicsCategory.Projectile | PhysicsCategory.Tower
         physicsBody?.collisionBitMask = PhysicsCategory.None
+        
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

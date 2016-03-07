@@ -28,11 +28,16 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
     
     var lastTouchLocation = CGPoint.zero
     
-    //TODO: Add Enemy Array
+    let playableRect : CGRect
+    
     
     var touched = false
     override init(size: CGSize){
-        //TODO: Implement PlayableRect similar to ZombieConga
+        let maxAspectRatio: CGFloat = 16.0 / 9.0
+        let playableHeight = size.width / maxAspectRatio
+        let playableMargin = (size.height - playableHeight)/2.0
+        playableRect = CGRect(x: 0, y: playableMargin, width: size.width, height: playableHeight)
+
         super.init(size: size)
     }
     
@@ -59,6 +64,8 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         for e in enemies{
             addChild(e)
         }
+        
+        debugDrawPlayableArea()
     }
     
     func handlePinch(sender: UIPinchGestureRecognizer) {
@@ -118,7 +125,6 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         lastUpdateTime = currentTime
         
         tower.update(dt)
-        //TODO: Add Enemy Array update
         
         if tower.willFire && touched{
             tower.fire()
@@ -127,6 +133,8 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         for e in enemies{
             e.update(tower.position, dt: dt)
         }
+        
+        
     }
     
     func projectileHitEnemy(enemy: SKSpriteNode, projectile: SKEmitterNode) {
@@ -181,6 +189,18 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer,
          shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool{
         return true
+    }
+    
+    //MARK: Debug Functions
+    
+    func debugDrawPlayableArea() {
+        let shape = SKShapeNode()
+        let path = CGPathCreateMutable()
+        CGPathAddRect(path, nil, playableRect)
+        shape.path = path
+        shape.strokeColor = SKColor.redColor()
+        shape.lineWidth = 4.0
+        addChild(shape)
     }
 }
 
