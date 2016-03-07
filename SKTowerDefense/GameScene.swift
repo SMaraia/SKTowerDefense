@@ -28,8 +28,8 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
     
     
     var lastTouchLocation = CGPoint.zero
-    
-    let playableRect : CGRect
+    let playableRect: CGRect
+
     
     
     var touched = false
@@ -60,13 +60,7 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         let pinch = UIPinchGestureRecognizer(target: self, action: "handlePinch:")
         self.view!.addGestureRecognizer(pinch)
         
-        
-        enemies.append(Enemy())
-        for e in enemies{
-            addChild(e)
-        }
-        
-        debugDrawPlayableArea()
+        spawnEnemies()
     }
     
     func handlePinch(sender: UIPinchGestureRecognizer) {
@@ -135,7 +129,11 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
             e.update(tower.position, dt: dt)
         }
         
-        
+        if enemies.count == 0{
+            wave += 1
+            //print("A new wave has started")
+            spawnEnemies()
+        }
     }
     
     func projectileHitEnemy(enemy: SKSpriteNode, projectile: SKEmitterNode) {
@@ -193,6 +191,15 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         return true
     }
     
+    func spawnEnemies(){
+        let enemiesToSpawn = calcFibonacciNumber(wave)
+        for _ in 0...enemiesToSpawn {
+            self.enemies.append(Enemy())
+        }
+        for e in enemies{
+            addChild(e)
+        }
+    }
     //MARK: Debug Functions
     
     func debugDrawPlayableArea() {
@@ -204,6 +211,6 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         shape.lineWidth = 4.0
         addChild(shape)
     }
+
+
 }
-
-
