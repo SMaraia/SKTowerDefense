@@ -21,6 +21,7 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
     let tower = Tower()
     
     var enemies = [Enemy]()
+    var wave = 0;
     
     var lastUpdateTime: NSTimeInterval = 0
     var dt: NSTimeInterval = 0
@@ -139,16 +140,17 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
     
     func projectileHitEnemy(enemy: SKSpriteNode, projectile: SKEmitterNode) {
         projectile.removeFromParent()
-        print(enemies.count)
+        //print(enemies.count)
+        enemies.removeAtIndex(enemies.indexOf(enemy as! Enemy)!)
         enemy.removeFromParent()
-        print(enemies.count)
+        //print(enemies.count)
     }
     
     func towerHitEnemy(enemy: SKSpriteNode, tower: SKSpriteNode) {
-        print(enemies.count)
+        //print(enemies.count)
         enemies.removeAtIndex(enemies.indexOf(enemy as! Enemy)!)
         enemy.removeFromParent()
-        print(enemies.count)
+        //print(enemies.count)
         //TODO: tower.takeDamage()
     }
     
