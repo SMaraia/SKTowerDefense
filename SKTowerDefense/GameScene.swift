@@ -28,12 +28,18 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
     
     
     var lastTouchLocation = CGPoint.zero
-    
-    //TODO: Add Enemy Array
+    let playableRect: CGRect
+
     
     var touched = false
     override init(size: CGSize){
         //TODO: Implement PlayableRect similar to ZombieConga
+        let maxAspectRatio:CGFloat = 16.0/9.0
+        let playableHeight = size.width / maxAspectRatio
+        let playableMargin = (size.height-playableHeight)/2.0
+        playableRect = CGRect(x: 0, y: playableMargin,
+            width: size.width,
+            height: playableHeight)
         super.init(size: size)
     }
     
@@ -127,23 +133,24 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         
         if enemies.count == 0{
             ++wave
+            //print("A new wave has started")
             spawnEnemies()
         }
     }
     
     func projectileHitEnemy(enemy: SKSpriteNode, projectile: SKEmitterNode) {
         projectile.removeFromParent()
-        print(enemies.count)
+        //print(enemies.count)
         enemies.removeAtIndex(enemies.indexOf(enemy as! Enemy)!)
         enemy.removeFromParent()
-        print(enemies.count)
+        //print(enemies.count)
     }
     
     func towerHitEnemy(enemy: SKSpriteNode, tower: SKSpriteNode) {
-        print(enemies.count)
+        //print(enemies.count)
         enemies.removeAtIndex(enemies.indexOf(enemy as! Enemy)!)
         enemy.removeFromParent()
-        print(enemies.count)
+        //print(enemies.count)
         //TODO: tower.takeDamage()
     }
     
