@@ -17,7 +17,7 @@ class Enemy: SKSpriteNode{
     
     
     init(){
-        let texture = SKTexture(imageNamed: "Spaceship")
+        let texture = SKTexture(imageNamed: "slime1")
         
         super.init(texture: texture, color: SKColor.clearColor(), size: texture.size())
         
