@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		676D1D3F1C85E22D00234316 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676D1D3E1C85E22D00234316 /* Enemy.swift */; };
+		C544CE841C8E4C0E00F437F5 /* PowerUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C544CE831C8E4C0E00F437F5 /* PowerUp.swift */; };
 		C55FD0A31C7ED81F00B4CAB9 /* MyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD0A11C7ED81F00B4CAB9 /* MyUtils.swift */; };
 		C58267E11C761CF10084A710 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58267E01C761CF10084A710 /* AppDelegate.swift */; };
 		C58267E51C761CF10084A710 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58267E41C761CF10084A710 /* GameScene.swift */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		676D1D3E1C85E22D00234316 /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		C544CE831C8E4C0E00F437F5 /* PowerUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PowerUp.swift; sourceTree = "<group>"; };
 		C55FD0A11C7ED81F00B4CAB9 /* MyUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyUtils.swift; sourceTree = "<group>"; };
 		C58267DD1C761CF10084A710 /* SKTowerDefense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SKTowerDefense.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C58267E01C761CF10084A710 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 			children = (
 				C58267E01C761CF10084A710 /* AppDelegate.swift */,
 				C58267E41C761CF10084A710 /* GameScene.swift */,
+				C544CE831C8E4C0E00F437F5 /* PowerUp.swift */,
 				C58267E61C761CF10084A710 /* GameViewController.swift */,
 				C5A274331C856E14000D094D /* Tower.swift */,
 				676D1D3E1C85E22D00234316 /* Enemy.swift */,
@@ -180,6 +183,7 @@
 				676D1D3F1C85E22D00234316 /* Enemy.swift in Sources */,
 				C5A2742A1C85671E000D094D /* StartGameScene.swift in Sources */,
 				C58267E11C761CF10084A710 /* AppDelegate.swift in Sources */,
+				C544CE841C8E4C0E00F437F5 /* PowerUp.swift in Sources */,
 				C55FD0A31C7ED81F00B4CAB9 /* MyUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

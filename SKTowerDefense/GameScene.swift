@@ -14,6 +14,36 @@ struct PhysicsCategory {
     static let Enemy      : UInt32 = 0b1
     static let Projectile : UInt32 = 0b10
     static let Tower      : UInt32 = 0b100
+    static let PowerUp    : UInt32 = 0b1000
+}
+
+struct PowerUp {
+    var type: FireType
+    var bulletsToSpawn: Int
+    var cooldown: Double
+    var explosive: Bool
+
+    init(type: FireType){
+        self.type = type
+        switch type {
+        case .AreaEffect:
+            bulletsToSpawn = 1
+            cooldown = 1.0
+            explosive = true
+        case .RapidFire:
+            bulletsToSpawn = 1
+            cooldown = 0.2
+            explosive = false
+        case .TripleShot:
+            bulletsToSpawn = 3
+            cooldown = 0.5
+            explosive = false
+        case .Normal:
+            bulletsToSpawn = 1
+            cooldown = 0.5
+            explosive = false
+        }
+    }
 }
 
 class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate {
@@ -21,7 +51,10 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
     let tower = Tower()
     
     var enemies = [Enemy]()
+    
     var wave = 0;
+    
+    var currentPowerUpNode: [PowerUpSprite]
     
     var lastUpdateTime: NSTimeInterval = 0
     var dt: NSTimeInterval = 0
@@ -30,7 +63,13 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
     var lastTouchLocation = CGPoint.zero
     let playableRect: CGRect
 
+    var debugRapidFire = PowerUp(type: .RapidFire)
+    var debugNormal = PowerUp(type: .Normal)
+    var debugTripleShot = PowerUp(type: .TripleShot)
+    var debugAreaEffect = PowerUp(type: .AreaEffect)
     
+    var debugFireTypes : [PowerUp]
+    var currentFireType: Int = 0
     
     var touched = false
     override init(size: CGSize){
@@ -39,7 +78,16 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         let playableMargin = (size.height - playableHeight)/2.0
         playableRect = CGRect(x: 0, y: playableMargin, width: size.width, height: playableHeight)
 
+        debugFireTypes = []
+        debugFireTypes.append(debugNormal)
+        debugFireTypes.append(debugRapidFire)
+        debugFireTypes.append(debugTripleShot)
+        debugFireTypes.append(debugAreaEffect)
+        
+        currentPowerUpNode = []
+        
         super.init(size: size)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -57,10 +105,14 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         tower.yScale = 0.25
         addChild(tower)
         
+        
         let pinch = UIPinchGestureRecognizer(target: self, action: "handlePinch:")
         self.view!.addGestureRecognizer(pinch)
         
         spawnEnemies()
+        
+        let powerUpTimer = NSTimer(timeInterval: 10.0, target: self, selector: "spawnPowerUp", userInfo: nil, repeats: true)
+        NSRunLoop.mainRunLoop().addTimer(powerUpTimer, forMode: NSRunLoopCommonModes)
     }
     
     func handlePinch(sender: UIPinchGestureRecognizer) {
@@ -70,8 +122,21 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
                 print("Pinched Out")
             } else if sender.scale < 1 {
                 print("Pinched In")
+                currentFireType = (currentFireType + 1) % debugFireTypes.count
+                tower.applyPowerUp(debugFireTypes[currentFireType])
             }
         }
+    }
+    
+    func spawnPowerUp() {
+        let powerUpNode = PowerUpSprite()
+        addChild(powerUpNode)
+        let clearAction = SKAction.runBlock() {
+            self.currentPowerUpNode = []
+        }
+        powerUpNode.runAction(SKAction.sequence([SKAction.waitForDuration(7.5), clearAction, SKAction.removeFromParent()]))
+        currentPowerUpNode.append(powerUpNode)
+        
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -134,6 +199,10 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
             //print("A new wave has started")
             spawnEnemies()
         }
+        
+        if(currentPowerUpNode.count > 0) {
+            currentPowerUpNode[0].update(dt)
+        }
     }
     
     func projectileHitEnemy(enemy: SKSpriteNode, projectile: SKEmitterNode) {
@@ -144,11 +213,20 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         //print(enemies.count)
     }
     
+    func projectileHitPowerUp(powerUpNode: PowerUpSprite, projectile: SKEmitterNode) {
+        
+        let powerUp = PowerUp(type: powerUpNode.type)
+        tower.applyPowerUp(powerUp)
+        
+        projectile.removeFromParent()
+        powerUpNode.removeFromParent()
+        
+        currentPowerUpNode = []
+    }
+    
     func towerHitEnemy(enemy: SKSpriteNode, tower: SKSpriteNode) {
-        //print(enemies.count)
         enemies.removeAtIndex(enemies.indexOf(enemy as! Enemy)!)
         enemy.removeFromParent()
-        //print(enemies.count)
         //TODO: tower.takeDamage()
     }
     
@@ -181,6 +259,8 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
             
         } else if(firstBody.categoryBitMask & PhysicsCategory.Enemy != 0) && (secondBody.categoryBitMask & PhysicsCategory.Tower != 0) {
             towerHitEnemy(firstBody.node as! SKSpriteNode, tower: secondBody.node as! SKSpriteNode)
+        } else if (firstBody.categoryBitMask & PhysicsCategory.Projectile != 0) && (secondBody.categoryBitMask & PhysicsCategory.PowerUp != 0) {
+            projectileHitPowerUp(secondBody.node as! PowerUpSprite, projectile: firstBody.node as! SKEmitterNode)
         }
     }
 
