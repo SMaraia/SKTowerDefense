@@ -101,8 +101,8 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         physicsWorld.contactDelegate = self
         
         tower.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame))
-        tower.xScale = 0.25
-        tower.yScale = 0.25
+        tower.xScale = 0.5
+        tower.yScale = 0.5
         addChild(tower)
         
         

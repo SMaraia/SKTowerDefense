@@ -17,7 +17,7 @@ class Enemy: SKSpriteNode{
     
     
     init(){
-        let texture = SKTexture(imageNamed: "slime1")
+        let texture = SKTexture(imageNamed: "Enemy")
         
         super.init(texture: texture, color: SKColor.clearColor(), size: texture.size())
         
@@ -56,8 +56,8 @@ class Enemy: SKSpriteNode{
         self.position = CGPoint(
             x: tempX,
             y: tempY)
-        self.xScale = 0.1
-        self.yScale = 0.1
+        self.xScale = 0.5
+        self.yScale = 0.5
         
         if(self.position.y >= size.height || self.position.y <= 0){
             moveSpeed = 2.5
