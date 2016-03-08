@@ -30,7 +30,7 @@ class Tower: SKSpriteNode{
     
     init(){
         bullet = NSKeyedUnarchiver.unarchiveObjectWithFile(bulletPath!) as! SKEmitterNode
-        let texture = SKTexture(imageNamed: "Spaceship")
+        let texture = SKTexture(imageNamed: "towerTop")
         super.init(texture: texture, color: SKColor.clearColor(), size: texture.size())
         
         physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.5, size: size)
