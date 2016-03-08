@@ -48,15 +48,30 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
+        let background = SKSpriteNode(imageNamed: "Background")
+        background.position = CGPoint(x: size.width/2, y: size.height/2)
+        background.anchorPoint = CGPoint(x: 0.5, y: 0.5) // default
+        background.zPosition = -2
+        background.size.width = playableRect.width
+        background.size.height = playableRect.height
+        addChild(background)
+        
         
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         physicsWorld.contactDelegate = self
         
-        tower.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame))
-        tower.xScale = 0.25
-        tower.yScale = 0.25
-        addChild(tower)
+        let towerBase = SKSpriteNode(imageNamed: "TowerBase")
+        towerBase.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame))
+        towerBase.xScale = 0.35
+        towerBase.yScale = 0.4
+        towerBase.zPosition = -1
+        addChild(towerBase)
         
+        tower.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame))
+        tower.xScale = 0.35
+        tower.yScale = 0.35
+        addChild(tower)
+      
         let pinch = UIPinchGestureRecognizer(target: self, action: "handlePinch:")
         self.view!.addGestureRecognizer(pinch)
         

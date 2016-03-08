@@ -22,11 +22,12 @@ class Tower: SKSpriteNode{
     
     let bulletPath = NSBundle.mainBundle().pathForResource("Fireball", ofType: "sks")
     var bullet : SKEmitterNode
-    
+   
     
     init(){
         bullet = NSKeyedUnarchiver.unarchiveObjectWithFile(bulletPath!) as! SKEmitterNode
-        let texture = SKTexture(imageNamed: "towerTop")
+               
+        let texture = SKTexture(imageNamed: "TowerTop")
         super.init(texture: texture, color: SKColor.clearColor(), size: texture.size())
         
         physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.5, size: size)
@@ -51,8 +52,7 @@ class Tower: SKSpriteNode{
         tempBullet.physicsBody?.usesPreciseCollisionDetection = true
         
         parent!.addChild(tempBullet)
-        
-        
+
         
         tempBullet.runAction(SKAction.sequence([SKAction.moveTo(position + CGPoint(x: cos(zRotation), y: sin(zRotation)) * parent!.frame.width / 2, duration: 0.5), SKAction.removeFromParent()]))
         canFire = false
