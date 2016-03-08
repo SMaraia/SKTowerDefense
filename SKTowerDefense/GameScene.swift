@@ -259,6 +259,7 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
             
         } else if(firstBody.categoryBitMask & PhysicsCategory.Enemy != 0) && (secondBody.categoryBitMask & PhysicsCategory.Tower != 0) {
             towerHitEnemy(firstBody.node as! SKSpriteNode, tower: secondBody.node as! SKSpriteNode)
+            
         } else if (firstBody.categoryBitMask & PhysicsCategory.Projectile != 0) && (secondBody.categoryBitMask & PhysicsCategory.PowerUp != 0) {
             projectileHitPowerUp(secondBody.node as! PowerUpSprite, projectile: firstBody.node as! SKEmitterNode)
         }
@@ -272,7 +273,8 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
     }
     
     func spawnEnemies(){
-        let enemiesToSpawn = calcFibonacciNumber(wave)
+        let fib = calcFibonacciNumber(wave)
+        let enemiesToSpawn = fib > 50 ? 50: fib
         for _ in 0...enemiesToSpawn {
             self.enemies.append(Enemy())
         }
