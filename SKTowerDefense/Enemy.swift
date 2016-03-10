@@ -26,7 +26,6 @@ class Enemy: SKSpriteNode{
         for i in 1...4 {
             textures.append(SKTexture(imageNamed: "Slime\(i)"))
         }
-        print(textures.count)
         animation = SKAction.animateWithTextures(textures,
             timePerFrame: 0.3)
         

@@ -23,6 +23,7 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
     let tower = Tower()
     
     var enemies = [Enemy]()
+    var canSpawn: Bool = true
     
     var wave = 0;
     
@@ -199,9 +200,13 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         }
         
         if enemies.count == 0{
-            wave += 1
-            //print("A new wave has started")
-            spawnEnemies()
+            if(canSpawn){
+                canSpawn = false
+                wave += 1
+                print("A new wave has started")
+                let nextWaveTimer = NSTimer(timeInterval: 3.0, target: self, selector: "spawnEnemies", userInfo: nil, repeats: false)
+                NSRunLoop.mainRunLoop().addTimer(nextWaveTimer, forMode: NSRunLoopCommonModes)
+            }
         }
         
         if(currentPowerUpNode.count > 0) {
@@ -285,6 +290,7 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
     }
     
     func spawnEnemies(){
+        canSpawn = true
         let fib = calcFibonacciNumber(wave)
         let enemiesToSpawn = fib > 50 ? 50: fib
         for _ in 0...enemiesToSpawn {
