@@ -15,6 +15,7 @@ struct PhysicsCategory {
     static let Projectile : UInt32 = 0b10
     static let Tower      : UInt32 = 0b100
     static let PowerUp    : UInt32 = 0b1000
+    static let Explosion  : UInt32 = 0b10000
 }
 
 class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate {
@@ -208,10 +209,10 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         }
     }
     
-    func projectileHitEnemy(enemy: SKSpriteNode, projectile: Bullet) {
+    func projectileHitEnemy(enemy: Enemy, projectile: Bullet) {
         projectile.removeFromParent()
         //print(enemies.count)
-        enemies.removeAtIndex(enemies.indexOf(enemy as! Enemy)!)
+        enemies.removeAtIndex(enemies.indexOf(enemy)!)
         enemy.removeFromParent()
         //print(enemies.count)
     }
@@ -227,11 +228,16 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         currentPowerUpNode = []
     }
     
-    func towerHitEnemy(enemy: SKSpriteNode, tower: SKSpriteNode) {
+    func towerHitEnemy(enemy: Enemy, tower: Tower) {
         lives -= 1
-        enemies.removeAtIndex(enemies.indexOf(enemy as! Enemy)!)
+        enemies.removeAtIndex(enemies.indexOf(enemy)!)
         enemy.removeFromParent()
         //TODO: tower.takeDamage()
+    }
+    
+    func explosionClippedEnemy(enemy: Enemy) {
+        enemies.removeAtIndex(enemies.indexOf(enemy)!)
+        enemy.removeFromParent()
     }
     
     // MARK: - SKPhysicsContactDelegate Methods -
@@ -259,13 +265,15 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         
         if(firstBody.categoryBitMask & PhysicsCategory.Enemy != 0) &&
             (secondBody.categoryBitMask & PhysicsCategory.Projectile != 0) {
-            projectileHitEnemy(firstBody.node as! SKSpriteNode, projectile: secondBody.node as! Bullet)
+            projectileHitEnemy(firstBody.node as! Enemy, projectile: secondBody.node as! Bullet)
             
         } else if(firstBody.categoryBitMask & PhysicsCategory.Enemy != 0) && (secondBody.categoryBitMask & PhysicsCategory.Tower != 0) {
-            towerHitEnemy(firstBody.node as! SKSpriteNode, tower: secondBody.node as! SKSpriteNode)
+            towerHitEnemy(firstBody.node as! Enemy, tower: secondBody.node as! Tower)
             
         } else if (firstBody.categoryBitMask & PhysicsCategory.Projectile != 0) && (secondBody.categoryBitMask & PhysicsCategory.PowerUp != 0) {
             projectileHitPowerUp(firstBody.node as! Bullet, powerUpNode: secondBody.node as! PowerUpSprite)
+        } else if (firstBody.categoryBitMask & PhysicsCategory.Enemy != 0) && (secondBody.categoryBitMask & PhysicsCategory.Explosion != 0) {
+            explosionClippedEnemy(firstBody.node as! Enemy)
         }
     }
 
