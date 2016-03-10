@@ -17,35 +17,6 @@ struct PhysicsCategory {
     static let PowerUp    : UInt32 = 0b1000
 }
 
-struct PowerUp {
-    var type: FireType
-    var bulletsToSpawn: Int
-    var cooldown: Double
-    var explosive: Bool
-
-    init(type: FireType){
-        self.type = type
-        switch type {
-        case .AreaEffect:
-            bulletsToSpawn = 1
-            cooldown = 1.0
-            explosive = true
-        case .RapidFire:
-            bulletsToSpawn = 1
-            cooldown = 0.2
-            explosive = false
-        case .TripleShot:
-            bulletsToSpawn = 3
-            cooldown = 0.5
-            explosive = false
-        case .Normal:
-            bulletsToSpawn = 1
-            cooldown = 0.5
-            explosive = false
-        }
-    }
-}
-
 class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate {
     
     let tower = Tower()
@@ -70,6 +41,16 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
     
     var debugFireTypes : [PowerUp]
     var currentFireType: Int = 0
+    
+    var lives: Int = 5{
+        didSet{
+            if (livesText?.text != nil){
+                livesText?.text = "Lives: \(lives)"
+            }
+        }
+    }
+    
+    var livesText: SKLabelNode?
     
     var touched = false
     override init(size: CGSize){
@@ -105,13 +86,20 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         addChild(background)
         
         
+        livesText = SKLabelNode(fontNamed: "CONQUEST")
+        livesText?.text = "Lives: \(lives)"
+        livesText?.position = CGPoint(x: livesText!.frame.width / 2, y: livesText!.frame.height / 2)
+        livesText?.zPosition = 100
+        addChild(livesText!)
+        
+        
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         physicsWorld.contactDelegate = self
         
         let towerBase = SKSpriteNode(imageNamed: "TowerBase")
         towerBase.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame))
-        towerBase.xScale = 0.35
-        towerBase.yScale = 0.4
+        towerBase.xScale = 0.5
+        towerBase.yScale = 0.5
         towerBase.zPosition = -1
         addChild(towerBase)
         
@@ -220,7 +208,7 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         }
     }
     
-    func projectileHitEnemy(enemy: SKSpriteNode, projectile: SKEmitterNode) {
+    func projectileHitEnemy(enemy: SKSpriteNode, projectile: Bullet) {
         projectile.removeFromParent()
         //print(enemies.count)
         enemies.removeAtIndex(enemies.indexOf(enemy as! Enemy)!)
@@ -228,7 +216,7 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         //print(enemies.count)
     }
     
-    func projectileHitPowerUp(powerUpNode: PowerUpSprite, projectile: SKEmitterNode) {
+    func projectileHitPowerUp( projectile: Bullet, powerUpNode: PowerUpSprite) {
         
         let powerUp = PowerUp(type: powerUpNode.type)
         tower.applyPowerUp(powerUp)
@@ -240,6 +228,7 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
     }
     
     func towerHitEnemy(enemy: SKSpriteNode, tower: SKSpriteNode) {
+        lives -= 1
         enemies.removeAtIndex(enemies.indexOf(enemy as! Enemy)!)
         enemy.removeFromParent()
         //TODO: tower.takeDamage()
@@ -270,13 +259,13 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         
         if(firstBody.categoryBitMask & PhysicsCategory.Enemy != 0) &&
             (secondBody.categoryBitMask & PhysicsCategory.Projectile != 0) {
-            projectileHitEnemy(firstBody.node as! SKSpriteNode, projectile: secondBody.node as! SKEmitterNode)
+            projectileHitEnemy(firstBody.node as! SKSpriteNode, projectile: secondBody.node as! Bullet)
             
         } else if(firstBody.categoryBitMask & PhysicsCategory.Enemy != 0) && (secondBody.categoryBitMask & PhysicsCategory.Tower != 0) {
             towerHitEnemy(firstBody.node as! SKSpriteNode, tower: secondBody.node as! SKSpriteNode)
             
         } else if (firstBody.categoryBitMask & PhysicsCategory.Projectile != 0) && (secondBody.categoryBitMask & PhysicsCategory.PowerUp != 0) {
-            projectileHitPowerUp(secondBody.node as! PowerUpSprite, projectile: firstBody.node as! SKEmitterNode)
+            projectileHitPowerUp(firstBody.node as! Bullet, powerUpNode: secondBody.node as! PowerUpSprite)
         }
     }
 

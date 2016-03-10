@@ -20,16 +20,15 @@ class Tower: SKSpriteNode{
     var rotDir: CGPoint = CGPoint.zero
     
     
-    let bulletPath = NSBundle.mainBundle().pathForResource("Fireball", ofType: "sks")
-    var bullet : SKEmitterNode
+    var bullet: Bullet
     
     
-    var cooldownTime: Double = 0.5
+    var cooldownTime: Double = 0.3
     var bulletsToSpawn: Int = 1
     var bulletsExplode: Bool = false
     
     init(){
-        bullet = NSKeyedUnarchiver.unarchiveObjectWithFile(bulletPath!) as! SKEmitterNode
+        bullet = Bullet()
         let texture = SKTexture(imageNamed: "TowerTop")
         super.init(texture: texture, color: SKColor.clearColor(), size: texture.size())
         
@@ -47,15 +46,9 @@ class Tower: SKSpriteNode{
         
         
         if(bulletsToSpawn == 1){
-            let tempBullet = bullet.copy() as! SKEmitterNode
+            let tempBullet = bullet.copy() as! Bullet
             tempBullet.position = position + CGPoint(x: cos(zRotation) * (frame.width / 2), y: sin(zRotation) * (frame.height / 2))
             tempBullet.zRotation = zRotation
-            tempBullet.physicsBody = SKPhysicsBody(circleOfRadius: tempBullet.particlePositionRange.dx)
-            tempBullet.physicsBody?.dynamic = true
-            tempBullet.physicsBody?.categoryBitMask = PhysicsCategory.Projectile
-            tempBullet.physicsBody?.contactTestBitMask = PhysicsCategory.Enemy
-            tempBullet.physicsBody?.collisionBitMask = PhysicsCategory.None
-            tempBullet.physicsBody?.usesPreciseCollisionDetection = true
             
             parent!.addChild(tempBullet)
             
@@ -67,15 +60,9 @@ class Tower: SKSpriteNode{
         else {
         for i in 0..<bulletsToSpawn{
             let angleModifier : CGFloat = CGFloat(GLKMathDegreesToRadians(15.0)) * CGFloat(i-1)
-            let tempBullet = bullet.copy() as! SKEmitterNode
+            let tempBullet = bullet.copy() as! Bullet
             tempBullet.position = position + CGPoint(x: cos(zRotation) * (frame.width / 2), y: sin(zRotation) * (frame.height / 2))
             tempBullet.zRotation = zRotation
-            tempBullet.physicsBody = SKPhysicsBody(circleOfRadius: tempBullet.particlePositionRange.dx)
-            tempBullet.physicsBody?.dynamic = true
-            tempBullet.physicsBody?.categoryBitMask = PhysicsCategory.Projectile
-            tempBullet.physicsBody?.contactTestBitMask = PhysicsCategory.Enemy
-            tempBullet.physicsBody?.collisionBitMask = PhysicsCategory.None
-            tempBullet.physicsBody?.usesPreciseCollisionDetection = true
             
             parent!.addChild(tempBullet)
             

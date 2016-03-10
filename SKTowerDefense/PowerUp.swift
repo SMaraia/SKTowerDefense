@@ -14,7 +14,37 @@ enum FireType {
     case AreaEffect
     case Normal
 }
+//Passsed from PowerUpSprites to Towers that shoot them
+struct PowerUp {
+    var type: FireType
+    var bulletsToSpawn: Int
+    var cooldown: Double
+    var explosive: Bool
+    
+    init(type: FireType){
+        self.type = type
+        switch type {
+        case .AreaEffect:
+            bulletsToSpawn = 1
+            cooldown = 0.6
+            explosive = true
+        case .RapidFire:
+            bulletsToSpawn = 1
+            cooldown = 0.1
+            explosive = false
+        case .TripleShot:
+            bulletsToSpawn = 3
+            cooldown = 0.3
+            explosive = false
+        case .Normal:
+            bulletsToSpawn = 1
+            cooldown = 0.3
+            explosive = false
+        }
+    }
+}
 
+//Objects for the Player to shoot to gain a PowerUp
 class PowerUpSprite: SKSpriteNode{
     
     let moveSpeed: CGFloat = 5.0
