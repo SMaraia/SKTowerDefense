@@ -77,7 +77,7 @@ class Enemy: SKSpriteNode{
         physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.5, size: self.size)
         physicsBody?.dynamic = true
         physicsBody?.categoryBitMask = PhysicsCategory.Enemy
-        physicsBody?.contactTestBitMask = PhysicsCategory.Projectile | PhysicsCategory.Tower
+        physicsBody?.contactTestBitMask = PhysicsCategory.Projectile | PhysicsCategory.Tower | PhysicsCategory.Explosion
         physicsBody?.collisionBitMask = PhysicsCategory.None
         self.runAction(
             SKAction.repeatActionForever(animation),
