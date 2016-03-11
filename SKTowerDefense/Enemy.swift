@@ -39,25 +39,25 @@ class Enemy: SKSpriteNode{
         
         switch quadrant{
         case 1: //Left side
-            tempX = -20
+            tempX = -size.width * 2
             tempY = CGFloat.random(
-                -100,
-                max: screenSize.height + 100)
+                -size.height * 2,
+                max: screenSize.height + size.height * 2)
         case 2: //Right side
-            tempX = screenSize.width + 80
+            tempX = screenSize.width + (size.width * 2)
             tempY = CGFloat.random(
-                -100,
-                max: screenSize.height + 100)
+                -size.height * 2,
+                max: screenSize.height + size.height * 2)
         case 3: //Bottom
             tempX = CGFloat.random(
-                -20,
-                max: screenSize.width + 80)
-            tempY = -100
+                -size.width * 2,
+                max: screenSize.width + size.width * 2)
+            tempY = -size.height * 2
         case 4:  //Top
             tempX = CGFloat.random(
-                -20,
-                max: screenSize.width + 80)
-            tempY = screenSize.height + 100
+                -size.width * 2,
+                max: screenSize.width + size.height * 2)
+            tempY = screenSize.height + size.height * 2
         default:
             tempX = 0
             tempY = 0
