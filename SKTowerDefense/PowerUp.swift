@@ -77,25 +77,29 @@ class PowerUpSprite: SKSpriteNode{
         
         switch quadrant{
         case 1: //Left side
-            tempX = -size.width * 2
+            tempX = 0
             tempY = CGFloat.random(
-                -size.height * 2,
-                max: screenSize.height + size.height * 2)
+                0,
+                max: screenSize.height)
+            direction = CGPoint(x: 1, y: 0)
         case 2: //Right side
-            tempX = screenSize.width + (size.width * 2)
+            tempX = screenSize.width
             tempY = CGFloat.random(
-                -size.height * 2,
-                max: screenSize.height + size.height * 2)
+                0,
+                max: screenSize.height)
+            direction = CGPoint(x: -1, y: 0)
         case 3: //Bottom
             tempX = CGFloat.random(
-                -size.width * 2,
-                max: screenSize.width + size.width * 2)
-            tempY = -size.height * 2
+                0,
+                max: screenSize.width)
+            tempY = 0
+            direction = CGPoint(x: 0, y: 1)
         case 4:  //Top
             tempX = CGFloat.random(
-                -size.width * 2,
-                max: screenSize.width + size.height * 2)
-            tempY = screenSize.height + size.height * 2
+                0,
+                max: screenSize.width)
+            tempY = screenSize.height
+            direction = CGPoint(x: 0, y: -1)
         default:
             tempX = 0
             tempY = 0
@@ -106,6 +110,7 @@ class PowerUpSprite: SKSpriteNode{
         self.position = CGPoint(
             x: tempX,
             y: tempY)
+        print(self.position)
         self.xScale = 0.25
         self.yScale = 0.25
         

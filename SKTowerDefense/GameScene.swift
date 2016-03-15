@@ -215,7 +215,7 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
                 canSpawn = false
                 wave += 1
                 //print("A new wave has started")
-                let nextWaveTimer = NSTimer(timeInterval: 0.1, target: self, selector: "spawnEnemies", userInfo: nil, repeats: false)
+                let nextWaveTimer = NSTimer(timeInterval: 3.0, target: self, selector: "spawnEnemies", userInfo: nil, repeats: false)
                 //Timer starts
                 NSRunLoop.mainRunLoop().addTimer(nextWaveTimer, forMode: NSRunLoopCommonModes)
                 //3 2 1 to screen
@@ -225,6 +225,9 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         
         if(currentPowerUpNode.count > 0) {
             currentPowerUpNode[0].update(dt)
+            //for p in currentPowerUpNode{
+                //p.update(dt)
+            //}
         }
     }
     
