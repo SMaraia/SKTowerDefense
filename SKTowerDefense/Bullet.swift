@@ -11,10 +11,6 @@ import SpriteKit
 
 class Bullet: SKSpriteNode{
     
-    var explosive = false
-    
-    
-    
     init(){
         let texture = SKTexture(imageNamed: "Bullet")
         super.init(texture: texture, color: SKColor.clearColor(), size: texture.size())

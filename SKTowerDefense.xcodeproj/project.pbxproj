@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		676D1D3F1C85E22D00234316 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676D1D3E1C85E22D00234316 /* Enemy.swift */; };
+		67AAFEF61C978FD8000E2443 /* Explosion AoE.sks in Resources */ = {isa = PBXBuildFile; fileRef = 67AAFEF51C978FD8000E2443 /* Explosion AoE.sks */; };
 		C544CE841C8E4C0E00F437F5 /* PowerUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C544CE831C8E4C0E00F437F5 /* PowerUp.swift */; };
 		C55FD0A31C7ED81F00B4CAB9 /* MyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD0A11C7ED81F00B4CAB9 /* MyUtils.swift */; };
 		C58267E11C761CF10084A710 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58267E01C761CF10084A710 /* AppDelegate.swift */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		676D1D3E1C85E22D00234316 /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		67AAFEF51C978FD8000E2443 /* Explosion AoE.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Explosion AoE.sks"; sourceTree = "<group>"; };
 		C544CE831C8E4C0E00F437F5 /* PowerUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PowerUp.swift; sourceTree = "<group>"; };
 		C55FD0A11C7ED81F00B4CAB9 /* MyUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyUtils.swift; sourceTree = "<group>"; };
 		C58267DD1C761CF10084A710 /* SKTowerDefense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SKTowerDefense.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +95,7 @@
 				C55FD0A11C7ED81F00B4CAB9 /* MyUtils.swift */,
 				C58267E81C761CF10084A710 /* Main.storyboard */,
 				C5A274251C854F7F000D094D /* Fireball.sks */,
+				67AAFEF51C978FD8000E2443 /* Explosion AoE.sks */,
 				C5A2742B1C856809000D094D /* newgamebtn.png */,
 				C5A274311C856B71000D094D /* aboutBtn.png */,
 				C58267EB1C761CF10084A710 /* Assets.xcassets */,
@@ -165,6 +168,7 @@
 				C5A2742E1C85695C000D094D /* CONQUEST.ttf in Resources */,
 				C5A274261C854F7F000D094D /* Fireball.sks in Resources */,
 				C58267EF1C761CF10084A710 /* LaunchScreen.storyboard in Resources */,
+				67AAFEF61C978FD8000E2443 /* Explosion AoE.sks in Resources */,
 				C5A2742C1C856809000D094D /* newgamebtn.png in Resources */,
 				C58267EC1C761CF10084A710 /* Assets.xcassets in Resources */,
 				C5A274321C856B71000D094D /* aboutBtn.png in Resources */,

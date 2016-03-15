@@ -26,6 +26,8 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
     var canSpawn: Bool = true
     
     var wave = 0;
+    var waveText: SKLabelNode = SKLabelNode(fontNamed: "CONQUEST")
+    var waveTimer = 4
     
     var currentPowerUpNode: [PowerUpSprite]
     
@@ -55,6 +57,8 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
     var livesText: SKLabelNode?
     
     var touched = false
+    
+    
     override init(size: CGSize){
         let maxAspectRatio: CGFloat = 16.0 / 9.0
         let playableHeight = size.width / maxAspectRatio
@@ -83,8 +87,8 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         background.position = CGPoint(x: size.width/2, y: size.height/2)
         background.anchorPoint = CGPoint(x: 0.5, y: 0.5) // default
         background.zPosition = -2
-        background.size.width = playableRect.width
-        background.size.height = playableRect.height
+        background.size.width = size.width
+        background.size.height = size.height
         addChild(background)
         
         
@@ -114,6 +118,12 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         let pinch = UIPinchGestureRecognizer(target: self, action: "handlePinch:")
         self.view!.addGestureRecognizer(pinch)
         
+        
+        waveText.text = ""
+        waveText.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame) + 50)
+        waveText.zPosition = 100
+        addChild(waveText)
+        
         spawnEnemies()
         
         let powerUpTimer = NSTimer(timeInterval: 10.0, target: self, selector: "spawnPowerUp", userInfo: nil, repeats: true)
@@ -129,6 +139,7 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
                 print("Pinched In")
                 currentFireType = (currentFireType + 1) % debugFireTypes.count
                 tower.applyPowerUp(debugFireTypes[currentFireType])
+                print(debugFireTypes[currentFireType].type)
             }
         }
     }
@@ -203,9 +214,12 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
             if(canSpawn){
                 canSpawn = false
                 wave += 1
-                print("A new wave has started")
-                let nextWaveTimer = NSTimer(timeInterval: 3.0, target: self, selector: "spawnEnemies", userInfo: nil, repeats: false)
+                //print("A new wave has started")
+                let nextWaveTimer = NSTimer(timeInterval: 0.1, target: self, selector: "spawnEnemies", userInfo: nil, repeats: false)
+                //Timer starts
                 NSRunLoop.mainRunLoop().addTimer(nextWaveTimer, forMode: NSRunLoopCommonModes)
+                //3 2 1 to screen
+                startWaveTimer()
             }
         }
         
@@ -215,11 +229,35 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
     }
     
     func projectileHitEnemy(enemy: Enemy, projectile: Bullet) {
+        if(tower.bulletsExplode){
+            let explosion = Bullet()
+            explosion.alpha = 0.0
+            //explosion.physicsBody?.categoryBitMask = PhysicsCategory.Explosion
+            explosion.position = projectile.position
+            explosion.yScale = 0.7
+            explosion.xScale = 0.7
+            
+            let explosionParticle = SKEmitterNode(fileNamed: "Explosion AoE.sks")!
+            explosionParticle.position = explosion.position
+            explosionParticle.yScale = explosion.yScale
+            explosionParticle.xScale = explosion.xScale
+            
+            addChild(explosion)
+            addChild(explosionParticle)
+
+            //let exploDuration = NSTimer(timeInterval: 3.0, target: self, selector: "removeExplosion", userInfo: nil, repeats: false)
+            //Timer starts
+            //NSRunLoop.mainRunLoop().addTimer(exploDuration, forMode: NSRunLoopCommonModes)
+        }
         projectile.removeFromParent()
-        //print(enemies.count)
         enemies.removeAtIndex(enemies.indexOf(enemy)!)
         enemy.removeFromParent()
-        //print(enemies.count)
+    }
+    
+    func removeExplosion(){
+        print("test")
+        //explosion.removeFromParent()
+        //explosionParticle.removeFromParent()
     }
     
     func projectileHitPowerUp( projectile: Bullet, powerUpNode: PowerUpSprite) {
@@ -300,6 +338,25 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
             addChild(e)
         }
     }
+    
+    func startWaveTimer(){
+        let nextWaveTimerText = NSTimer(timeInterval: 1.0, target: self, selector: "timerFlash", userInfo: nil, repeats: false)
+        //Timer starts
+        NSRunLoop.mainRunLoop().addTimer(nextWaveTimerText, forMode: NSRunLoopCommonModes)
+    }
+    
+    func timerFlash(){
+        waveText.text = "Next wave in: \(waveTimer - 1)"
+        waveTimer -= 1
+        if(waveTimer > 0){
+            self.startWaveTimer()
+        }
+        if(waveTimer <= 0){
+            waveText.text = ""
+            waveTimer = 4
+        }
+    }
+    
     //MARK: Debug Functions
     
     func debugDrawPlayableArea() {

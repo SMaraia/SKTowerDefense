@@ -51,8 +51,11 @@ class PowerUpSprite: SKSpriteNode{
     var type: FireType
     var direction: CGPoint
     
+    let screenSize: CGRect = UIScreen.mainScreen().bounds
+
+    
     init(){
-        let texture = SKTexture(imageNamed: "Spaceship")
+        let texture = SKTexture(imageNamed: "Powerup")
         
         switch arc4random_uniform(3) {
         case 0:
@@ -74,33 +77,28 @@ class PowerUpSprite: SKSpriteNode{
         
         switch quadrant{
         case 1: //Left side
-            tempX = -20
+            tempX = -size.width * 2
             tempY = CGFloat.random(
-                50,
-                max: size.height - 50)
-            direction = CGPoint(x: 1, y: 0)
+                -size.height * 2,
+                max: screenSize.height + size.height * 2)
         case 2: //Right side
-            tempX = (2*size.width) - 80
+            tempX = screenSize.width + (size.width * 2)
             tempY = CGFloat.random(
-                100,
-                max: size.height - 100)
-            direction = CGPoint(x: -1, y: 0)
+                -size.height * 2,
+                max: screenSize.height + size.height * 2)
         case 3: //Bottom
             tempX = CGFloat.random(
-                20,
-                max: (2*size.width) - 80)
-            tempY = -100
-            direction = CGPoint(x: 0, y: 1)
+                -size.width * 2,
+                max: screenSize.width + size.width * 2)
+            tempY = -size.height * 2
         case 4:  //Top
             tempX = CGFloat.random(
-                20,
-                max: (2*size.width) - 80)
-            tempY = size.height + 100
-            direction = CGPoint(x: 0, y: -1)
+                -size.width * 2,
+                max: screenSize.width + size.height * 2)
+            tempY = screenSize.height + size.height * 2
         default:
             tempX = 0
             tempY = 0
-            
         }
         
         
@@ -108,8 +106,8 @@ class PowerUpSprite: SKSpriteNode{
         self.position = CGPoint(
             x: tempX,
             y: tempY)
-        self.xScale = 0.1
-        self.yScale = 0.1
+        self.xScale = 0.25
+        self.yScale = 0.25
         
         
         physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.5, size: self.size)
