@@ -11,6 +11,7 @@
 		67AAFEF61C978FD8000E2443 /* Explosion AoE.sks in Resources */ = {isa = PBXBuildFile; fileRef = 67AAFEF51C978FD8000E2443 /* Explosion AoE.sks */; };
 		C544CE841C8E4C0E00F437F5 /* PowerUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C544CE831C8E4C0E00F437F5 /* PowerUp.swift */; };
 		C55FD0A31C7ED81F00B4CAB9 /* MyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FD0A11C7ED81F00B4CAB9 /* MyUtils.swift */; };
+		C57C6AF41C97C8B200811C9B /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57C6AF31C97C8B200811C9B /* GameOverScene.swift */; };
 		C58267E11C761CF10084A710 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58267E01C761CF10084A710 /* AppDelegate.swift */; };
 		C58267E51C761CF10084A710 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58267E41C761CF10084A710 /* GameScene.swift */; };
 		C58267E71C761CF10084A710 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58267E61C761CF10084A710 /* GameViewController.swift */; };
@@ -33,6 +34,7 @@
 		67AAFEF51C978FD8000E2443 /* Explosion AoE.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Explosion AoE.sks"; sourceTree = "<group>"; };
 		C544CE831C8E4C0E00F437F5 /* PowerUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PowerUp.swift; sourceTree = "<group>"; };
 		C55FD0A11C7ED81F00B4CAB9 /* MyUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyUtils.swift; sourceTree = "<group>"; };
+		C57C6AF31C97C8B200811C9B /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		C58267DD1C761CF10084A710 /* SKTowerDefense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SKTowerDefense.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C58267E01C761CF10084A710 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C58267E41C761CF10084A710 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			children = (
 				C58267E01C761CF10084A710 /* AppDelegate.swift */,
 				C58267E41C761CF10084A710 /* GameScene.swift */,
+				C57C6AF31C97C8B200811C9B /* GameOverScene.swift */,
 				C59222641C91BE5900F043BF /* Bullet.swift */,
 				C544CE831C8E4C0E00F437F5 /* PowerUp.swift */,
 				C58267E61C761CF10084A710 /* GameViewController.swift */,
@@ -185,6 +188,7 @@
 			files = (
 				C58267E51C761CF10084A710 /* GameScene.swift in Sources */,
 				C58267E71C761CF10084A710 /* GameViewController.swift in Sources */,
+				C57C6AF41C97C8B200811C9B /* GameOverScene.swift in Sources */,
 				C5A274301C856A08000D094D /* AboutGameScene.swift in Sources */,
 				C5A274341C856E14000D094D /* Tower.swift in Sources */,
 				676D1D3F1C85E22D00234316 /* Enemy.swift in Sources */,

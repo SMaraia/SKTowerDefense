@@ -51,6 +51,13 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
             if (livesText?.text != nil){
                 livesText?.text = "Lives: \(lives)"
             }
+        
+            if (lives == 0) {
+                let gameOverScene = GameOverScene(size: size)
+                let transitionType = SKTransition.flipHorizontalWithDuration(0.25)
+                view?.presentScene(gameOverScene, transition: transitionType)
+
+            }
         }
     }
     
@@ -208,6 +215,15 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         
         for e in enemies{
             e.update(tower.position, dt: dt)
+            if e.position.x > size.width || e.position.x < 0 || e.position.y > size.height || e.position.y < 0 {
+                let point = onscreenVectorVersion(size, position: e.position)
+                let alertNode = SKSpriteNode(imageNamed: "alert")
+                alertNode.position = point
+                alertNode.xScale = 0.5
+                alertNode.yScale = 0.5
+                addChild(alertNode)
+                alertNode.runAction(SKAction.sequence([SKAction.waitForDuration(dt), SKAction.removeFromParent()]))
+            }
         }
         
         if enemies.count == 0{

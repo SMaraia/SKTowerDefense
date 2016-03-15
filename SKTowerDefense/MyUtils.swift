@@ -120,6 +120,27 @@ func shortestAngleBetween(angle1: CGFloat,
   return angle
 }
 
+func onscreenVectorVersion(size: CGSize, position: CGPoint) -> CGPoint {
+    var returnValue = position
+    
+    let CoordinateConversion = CGPoint(x: size.width / 2, y: -size.height / 2)
+    returnValue += CoordinateConversion
+    
+    if(returnValue.y > abs(size.height / 2)) {
+        let yFactor = returnValue.y / (size.height / 2)
+        returnValue /= yFactor
+    }
+    
+    if(returnValue.x > abs(size.width / 2)){
+        let xFactor = returnValue.x / (size.width / 2)
+        returnValue /= xFactor
+    }
+
+    
+    returnValue -= CoordinateConversion
+    return returnValue
+}
+
 extension CGFloat {
   func sign() -> CGFloat {
     return (self >= 0.0) ? 1.0 : -1.0
