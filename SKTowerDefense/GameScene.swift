@@ -248,20 +248,27 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
             addChild(explosion)
             addChild(explosionParticle)
 
-            //let exploDuration = NSTimer(timeInterval: 3.0, target: self, selector: "removeExplosion", userInfo: nil, repeats: false)
+            
+            //Set timers to remove the explosion and the particle in 3 seconds
+            let exploDuration = NSTimer(timeInterval: 3.0, target: self, selector: "removeExplosion:", userInfo: explosion, repeats: false)
             //Timer starts
-            //NSRunLoop.mainRunLoop().addTimer(exploDuration, forMode: NSRunLoopCommonModes)
+            NSRunLoop.mainRunLoop().addTimer(exploDuration, forMode: NSRunLoopCommonModes)
+            let exploDuration2 = NSTimer(timeInterval: 3.0, target: self, selector: "removeExplosion:", userInfo: explosionParticle, repeats: false)
+            //Timer starts
+            NSRunLoop.mainRunLoop().addTimer(exploDuration2, forMode: NSRunLoopCommonModes)
         }
         projectile.removeFromParent()
         enemies.removeAtIndex(enemies.indexOf(enemy)!)
         enemy.removeFromParent()
     }
     
-    func removeExplosion(){
+    func removeExplosion(timer: NSTimer){
         print("test")
-        //explosion.removeFromParent()
+        print(timer.userInfo)
+        timer.userInfo!.removeFromParent()
         //explosionParticle.removeFromParent()
     }
+    
     
     func projectileHitPowerUp( projectile: Bullet, powerUpNode: PowerUpSprite) {
         

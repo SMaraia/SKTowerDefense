@@ -110,7 +110,6 @@ class PowerUpSprite: SKSpriteNode{
         self.position = CGPoint(
             x: tempX,
             y: tempY)
-        print(self.position)
         self.xScale = 0.25
         self.yScale = 0.25
         
