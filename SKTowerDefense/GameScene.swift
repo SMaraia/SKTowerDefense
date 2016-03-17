@@ -216,11 +216,27 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
         for e in enemies{
             e.update(tower.position, dt: dt)
             if e.position.x > size.width || e.position.x < 0 || e.position.y > size.height || e.position.y < 0 {
-                let point = onscreenVectorVersion(size, position: e.position)
-                let alertNode = SKSpriteNode(imageNamed: "alert")
+                //let point = onscreenVectorVersion(size, position: e.position)
+                var point:CGPoint = CGPoint(x: 0, y: 0)
+                
+                if e.position.x > size.width{
+                    point = CGPoint(x: size.width, y: e.position.y)
+                }
+                if e.position.x < 0{
+                    point = CGPoint(x: 0, y: e.position.y)
+                }
+                if e.position.y > size.height{
+                    point = CGPoint(x: e.position.x, y: size.height)
+                }
+                if e.position.y < 0{
+                    point = CGPoint(x: e.position.x, y: 0)
+                }
+
+                
+                let alertNode = SKSpriteNode(imageNamed: "Alert")
                 alertNode.position = point
-                alertNode.xScale = 0.5
-                alertNode.yScale = 0.5
+                alertNode.xScale = 0.1
+                alertNode.yScale = 0.1
                 addChild(alertNode)
                 alertNode.runAction(SKAction.sequence([SKAction.waitForDuration(dt), SKAction.removeFromParent()]))
             }
@@ -279,8 +295,8 @@ class GameScene: SKScene, UIGestureRecognizerDelegate, SKPhysicsContactDelegate 
     }
     
     func removeExplosion(timer: NSTimer){
-        print("test")
-        print(timer.userInfo)
+        //print("test")
+        //print(timer.userInfo)
         timer.userInfo!.removeFromParent()
         //explosionParticle.removeFromParent()
     }
